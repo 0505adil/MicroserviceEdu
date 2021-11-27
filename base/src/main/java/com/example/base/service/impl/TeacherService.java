@@ -5,6 +5,7 @@ import com.example.base.model.Order;
 import com.example.base.model.Teacher;
 import com.example.base.repository.TeacherRepo;
 import com.example.base.service.iTeacherService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +22,8 @@ public class TeacherService implements iTeacherService {
     private RestTemplate restTemplate;
 
     @Override
-    public List<Document>  createTeacher(Teacher teacher) {
+    @HystrixCommand(fallbackMethod = "createFallback")
+    public Object  createTeacher(Teacher teacher) {
         List<Document> doc = restTemplate.getForObject("http://localhost:8082/api/clients/employees", List.class);
         Order order = new Order(null, "Teacher Salary", "150000");
         String resFinance = restTemplate.postForObject("http://localhost:8083/finance/create", order, String.class  );
@@ -42,5 +44,9 @@ public class TeacherService implements iTeacherService {
     @Override
     public Optional<Teacher> teacherById(Integer id) {
         return teacherRepo.findById(id);
+    }
+
+    private String createFallback(Teacher teacher) {
+        return "Cannot create teacher with name " + teacher.getName();
     }
 }
