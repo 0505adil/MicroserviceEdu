@@ -22,4 +22,8 @@ public class TeacherController {
         return teacherService.createTeacher(teacher);
     }
 
+    @GetMapping
+    public String hello(){
+        return "Hello";
+    }
 }
