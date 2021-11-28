@@ -24,7 +24,7 @@ public class TeacherService implements iTeacherService {
     @Override
     @HystrixCommand(fallbackMethod = "createFallback")
     public Object  createTeacher(Teacher teacher) {
-        List<Document> doc = restTemplate.getForObject("http://localhost:8082/api/clients/employees", List.class);
+        List<Document> doc = restTemplate.getForObject("http://localhost:8084/api/clients/employees", List.class);
         Order order = new Order(null, "Teacher Salary", "150000");
         String resFinance = restTemplate.postForObject("http://localhost:8083/finance/create", order, String.class  );
         teacherRepo.save(teacher);
