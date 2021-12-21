@@ -1,0 +1,30 @@
+<div class="margin-8">
+
+</div>
+<section class="service-section overflow-hidden" id="contact" *ngIf="user">
+  <div class="container">
+    <div class="row align-items-center bg-light rounded p-4">
+      <div class="col-lg-12">
+        <h5 class="text-primary mb-3">Teachers</h5>
+        <h3 class="mb-4">AdiletInc</h3>
+        <table class="table" *ngIf="todos">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let teacher of teachers">
+            <th scope="row">{{teacher.id}}</th>
+            <td>{{teacher.name}}</td>
+            <td>{{teacher.surname}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+

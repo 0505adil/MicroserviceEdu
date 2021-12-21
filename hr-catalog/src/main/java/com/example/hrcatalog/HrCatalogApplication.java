@@ -7,9 +7,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 @EnableEurekaClient
 
-@EnableCircuitBreaker
-@EnableHystrixDashboard
-@EnableHystrix
+
 public class HrCatalogApplication {
 
 	public static void main(String[] args) {

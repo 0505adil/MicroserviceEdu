@@ -6,6 +6,7 @@ import com.example.base.service.iTeacherService;
 import com.example.base.service.impl.TeacherService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class TeacherController {
     }
 
     @GetMapping
-    public String hello(){
-        return "Hello";
+    public ResponseEntity<List<Teacher>> all(){
+        return ResponseEntity.ok(teacherService.allTeachers());
     }
 }
